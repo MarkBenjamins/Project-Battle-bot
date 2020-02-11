@@ -379,21 +379,25 @@ void executeStoredCommand()
     if (commandString == "F")
     {
         updateLCDText("Driving forward");
+        updateSecondLCDText("No Game Selected");
         forward();
     }
     else if (commandString == "B")
     {
         updateLCDText("Driving backward");
+        updateSecondLCDText("No Game Selected");
         battleBotDrive.drive(driveSpeed, driveSpeed);
     }
     else if (commandString == "L")
     {
         updateLCDText("Driving left");
+        updateSecondLCDText("No Game Selected");
         battleBotDrive.drive(0, -100);
     }
     else if (commandString == "R")
     {
         updateLCDText("Driving right");
+        updateSecondLCDText("No Game Selected");
         battleBotDrive.drive(-100, 0);
     }
     else if (commandString == "S")
