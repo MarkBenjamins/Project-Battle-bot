@@ -260,7 +260,7 @@ void followLineProgram()
 
     case NON_SENSOR:
         updateSecondLCDText("No tape");
-        battleBotDrive.drive(40, 40);
+        battleBotDrive.drive(50, 200);
         break;
 
     default:
