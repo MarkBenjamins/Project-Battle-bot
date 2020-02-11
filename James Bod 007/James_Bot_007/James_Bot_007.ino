@@ -11,6 +11,25 @@
 #include <BattleBotDrive.h>
 
 /**
+ * Even wat informatie voor coderen
+ * 
+ * battleBotDrive.drive(0, 0);
+ * deze regel hierboven is om de wielen te laten draaien, linker getal is linker wiel en rechter getal is rechter wiel.
+ * Bij 0 staan de wielen stil. Bij bijvoorbeeld 50 gaat het wiel met een bepaalde snelheid vooruit en bij -50 gaat die achteruit.
+ * 
+ * 
+ * Hieronder uitleg over LCD Scherm
+ * updateLCDText("Text");
+ * De regel hierboven is om tekst te laten verschijnen op het bovenste gedeelte op het LCD Scherm.
+ * 
+ * updateSecondLCDText("Text");
+ * De regel hierboven is om tekst te laten verschijnen op het onderste gedeelte op het LCD Scherm.
+ * 
+ * Let wel op!! Er zijn maar 2 lijnen op het LCD Scherm om tekst neer te zetten. Er kunnen maximaal maar 16 tekens op een regel.
+ */
+
+
+/**
  * Define alle pins die we hebben
  */
 #define leftMotorForwardPin 3   // Output pin that is connected to the left motor for forward movement.
@@ -85,7 +104,6 @@ boolean firstTime = true;
 /**
  * The initiation of of objects that are used to communicate with the battle bot's modules.
  */
-
 // Create an new serial communication object for bluetooth communication.
 SoftwareSerial BTSerial(bluetoothReceivePin, bluetoothTransmitPin);
 
@@ -103,8 +121,7 @@ BattleBotDrive battleBotDrive(leftMotorForwardPin, rightMotorForwardPin, leftMot
 
 /**
  * Functie om de battleBot te initialiseren
- */
- 
+ */ 
 void setup() 
 {
     // Initialize the I/O pins
@@ -215,6 +232,7 @@ void updateSecondLCDText(String secondScreenText)
  * Dit is het einde van het definiëren van het LCD scherm.
  */
 
+
 /**
  * Lijn volgen programma, werkt niet maar is alvast klein begin
  */
@@ -252,8 +270,7 @@ void followLineProgram()
 
 /**
  * Begint door de loop() functie, checkt of er bluetooth commands binnenkomen.
- */
- 
+ */ 
 void receiveAndStoreCommand()
 {
     while (BTSerial.available())
@@ -323,7 +340,7 @@ void receiveAndStoreCommand()
 
 /**
  * Begint door de loop() functie, voert het bluetooth command uit.
- */
+ */ 
 void executeStoredCommand()
 {
 
@@ -384,7 +401,6 @@ void still()
 /**
  * Dit is de main functie, dit luistert constant naar inkomende commands
  */
-
 void loop() 
 {
     receiveAndStoreCommand();
