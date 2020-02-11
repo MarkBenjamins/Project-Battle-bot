@@ -124,8 +124,8 @@ void setup()
     // Start the LCD screen.
     lcd.begin();
     lcd.backlight();
-    updateLCDText("N.S.A.R.R");
-    updateSecondLCDText("Init bluetooth..");
+    updateLCDText("Bod, James Bod");
+    updateSecondLCDText("Give command");
     delay(1000);
     Serial.begin(9600);
     while (!Serial)
@@ -437,7 +437,7 @@ void executeStoredCommand()
     }
     else
     {        
-        updateLCDText("N.S.A.R.R");
+        updateLCDText("Bod, James Bod");
         updateSecondLCDText("Awaiting input..");
     }
 }
