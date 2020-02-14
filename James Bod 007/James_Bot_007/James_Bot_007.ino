@@ -141,7 +141,7 @@ void setup()
     lcd.backlight();
     updateLCDText("Bod, James Bod");
     updateSecondLCDText("Welcome");
-    delay(1000);
+    delay(2000);
     Serial.begin(9600);
     while (!Serial)
     {
@@ -243,14 +243,14 @@ void followLineProgram()
     {
     case RIGHT_SENSOR:
         updateSecondLCDText("Tape right");
-        battleBotDrive.drive(40, -10);
-        //battleBotDrive.drive(80, -40); 
+        battleBotDrive.drive(15, -15);
+        battleBotDrive.drive(30, -30);
         break;
 
     case LEFT_SENSOR:
         updateSecondLCDText("Tape left");
-        battleBotDrive.drive(-10, 40);
-        //battleBotDrive.drive(-40, 80); 
+        battleBotDrive.drive(-15, 15);
+        battleBotDrive.drive(-30, 30);
         break;
 
     case BOTH_SENSOR:
@@ -259,8 +259,9 @@ void followLineProgram()
         break;
 
     case NON_SENSOR:
-        updateSecondLCDText("No tape");
-        battleBotDrive.drive(100, 250);
+        updateSecondLCDText("No tape detected");
+        battleBotDrive.drive(47.5, 100);
+        battleBotDrive.drive(95, 200);
         break;
 
     default:
@@ -348,7 +349,7 @@ void executeStoredCommand()
     {
         updateLCDText("Driving forward");
         updateSecondLCDText("No Game Selected");
-        battleBotDrive.drive(100, 200);
+        battleBotDrive.drive(95, 200);
     }
     else if (commandString == "B")
     {
@@ -360,13 +361,13 @@ void executeStoredCommand()
     {
         updateLCDText("Driving left");
         updateSecondLCDText("No Game Selected");
-        battleBotDrive.drive(0, 200);
+        battleBotDrive.drive(0, 100);
     }
     else if (commandString == "R")
     {
         updateLCDText("Driving right");
         updateSecondLCDText("No Game Selected");
-        battleBotDrive.drive(200, 0);
+        battleBotDrive.drive(47.5, 0);
     }
     else if (commandString == "S")
     {
@@ -393,7 +394,7 @@ void still()
     firstTime = true;
 
     //vars for the other games to reset if called.
-    updateLCDText("STOP");
+    updateLCDText("Bod, James Bod");
     updateSecondLCDText("STOP");
     battleBotDrive.drive(0, 0);
 }
