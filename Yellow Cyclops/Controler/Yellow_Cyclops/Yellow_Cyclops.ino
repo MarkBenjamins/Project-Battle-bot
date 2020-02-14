@@ -28,7 +28,6 @@
  * Let wel op!! Er zijn maar 2 lijnen op het LCD Scherm om tekst neer te zetten. Er kunnen maximaal maar 16 tekens op een regel.
  */
 
-
 /**
  * Define alle pins die we hebben
  */
@@ -37,23 +36,23 @@
 #define rightMotorForwardPin 9  // Output pin that is connected to the right motor for forward movement.
 #define rightMotorBackwardPin 4 // Output pin that is connected to the right motor for backward movement.
 
-#define leftInfraredSensor 10  // Input pin that is connected to the left infrared sensor.
-#define rightInfraredSensor 11 // Input pin that is connected to the right infrared sensor.
+#define leftInfraredSensor 10   // Input pin that is connected to the left infrared sensor.
+#define rightInfraredSensor 11  // Input pin that is connected to the right infrared sensor.
 
-#define ultraEchoPin 12        // Input pin that is connected to the ultra echo sensor.
-#define ultraEchoTriggerPin 13 // Input pin that is connected to the trigger from the ultra echo sensor.
+#define ultraEchoPin 12         // Input pin that is connected to the ultra echo sensor.
+#define ultraEchoTriggerPin 13  // Input pin that is connected to the trigger from the ultra echo sensor.
 
 #define bluetoothReceivePin A0  // The input pin for receiving bluetooth messages.
 #define bluetoothTransmitPin A1 // The output pin for transmitting bluetooth messages.
 
-#define lcdDisplayAddress 0x27 // The address of the LCD display
-#define lcdDisplayColumns 16   // The amount of characters each row of the display has.
-#define lcdDisplayRows 2       // The amount of rows the display has
+#define lcdDisplayAddress 0x27  // The address of the LCD display
+#define lcdDisplayColumns 16    // The amount of characters each row of the display has.
+#define lcdDisplayRows 2        // The amount of rows the display has
 
-#define drivingLowerLimit 45  // The under limit for the motor speed.
-#define drivingUpperLimit 255 // The upper limit for the motor speed.
+#define drivingLowerLimit 45    // The under limit for the motor speed.
+#define drivingUpperLimit 255   // The upper limit for the motor speed.
 
-#define defaultDrivingSpeed 10 // The default speed of the cart.
+#define defaultDrivingSpeed 10  // The default speed of the cart.
 
 enum
 {
@@ -83,7 +82,6 @@ String commandArgument = "";
 String lcdDisplayText = "";       
 String secondLcdDisplayText = ""; 
 String debugMessage = ""; 
-
 
 /**
  * Declaration of variables that are needed to initate objects.
@@ -139,8 +137,8 @@ void setup()
     // Start the LCD screen.
     lcd.begin();
     lcd.backlight();
-    updateLCDText("Bod, James Bod");
-    updateSecondLCDText("Welcome");
+    updateLCDText("Yellow Cyclops 03");
+    updateSecondLCDText("Ready to start");
     delay(1000);
     Serial.begin(9600);
     while (!Serial)
@@ -236,18 +234,20 @@ void updateSecondLCDText(String secondScreenText)
 /**
  * Lijn volgen programma, werkt niet maar is alvast klein begin
  */
+
+/* volg de lijn spel */
 void followLineProgram()
 {
     TapeDetected onSensor = detectTape();
     switch (onSensor)
     {
-    case RIGHT_SENSOR:
+    case LEFT_SENSOR:
         updateSecondLCDText("Tape right");
         battleBotDrive.drive(40, -10);
         //battleBotDrive.drive(80, -40); 
         break;
 
-    case LEFT_SENSOR:
+    case RIGHT_SENSOR:
         updateSecondLCDText("Tape left");
         battleBotDrive.drive(-10, 40);
         //battleBotDrive.drive(-40, 80); 
@@ -255,12 +255,14 @@ void followLineProgram()
 
     case BOTH_SENSOR:
         updateSecondLCDText("Tape both");
+        delay(1000);
         battleBotDrive.drive(0, 0);
         break;
 
     case NON_SENSOR:
         updateSecondLCDText("No tape");
-        battleBotDrive.drive(100, 250);
+        delay(1000);
+        battleBotDrive.drive(10,10);
         break;
 
     default:
@@ -379,7 +381,7 @@ void executeStoredCommand()
     }
     else
     {        
-        updateLCDText("Bod, James Bod");
+        updateLCDText("Yellow Cyclops");
         updateSecondLCDText("Awaiting input..");
     }
 }
