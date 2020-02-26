@@ -243,25 +243,22 @@ void followLineProgram()
     {
     case RIGHT_SENSOR:
         updateSecondLCDText("Tape right");
-        battleBotDrive.drive(15, -15);
-        battleBotDrive.drive(30, -30);
+        battleBotDrive.drive(10, -10);
         break;
 
     case LEFT_SENSOR:
         updateSecondLCDText("Tape left");
-        battleBotDrive.drive(-15, 15);
-        battleBotDrive.drive(-30, 30);
+        battleBotDrive.drive(-10, 10);
         break;
 
     case BOTH_SENSOR:
         updateSecondLCDText("Tape both");
-        battleBotDrive.drive(0, 0);
+        battleBotDrive.drive(-10, -10);
         break;
 
     case NON_SENSOR:
         updateSecondLCDText("No tape detected");
-        battleBotDrive.drive(47.5, 100);
-        battleBotDrive.drive(95, 200);
+        battleBotDrive.drive(85, 100);
         break;
 
     default:
@@ -349,7 +346,7 @@ void executeStoredCommand()
     {
         updateLCDText("Driving forward");
         updateSecondLCDText("No Game Selected");
-        battleBotDrive.drive(95, 200);
+        battleBotDrive.drive(140, 200);
     }
     else if (commandString == "B")
     {
