@@ -137,7 +137,7 @@ void setup()
     // Start the LCD screen.
     lcd.begin();
     lcd.backlight();
-    updateLCDText("Yellow Cyclops 03");
+    updateLCDText("Yellow Cyclops 3");
     updateSecondLCDText("Ready to start");
     delay(1000);
     Serial.begin(9600);
@@ -235,7 +235,7 @@ void updateSecondLCDText(String secondScreenText)
  * Lijn volgen programma, werkt niet maar is alvast klein begin
  */
 
-/* volg de lijn spel */
+/* volg de lijn spel */ /* Controler X */
 void followLineProgram()
 {
     TapeDetected onSensor = detectTape();
@@ -243,26 +243,30 @@ void followLineProgram()
     {
     case LEFT_SENSOR:
         updateSecondLCDText("Tape right");
+        //battleBotDrive.drive(40, -10); werkt
+        //battleBotDrive.drive(80, -40);
+
         battleBotDrive.drive(40, -10);
-        //battleBotDrive.drive(80, -40); 
+        battleBotDrive.drive(80, -40);
         break;
 
     case RIGHT_SENSOR:
         updateSecondLCDText("Tape left");
+        //battleBotDrive.drive(-10, 40); werkt
+        //battleBotDrive.drive(-40, 80);
+
         battleBotDrive.drive(-10, 40);
-        //battleBotDrive.drive(-40, 80); 
+        battleBotDrive.drive(-40, 80);
         break;
 
     case BOTH_SENSOR:
         updateSecondLCDText("Tape both");
-        delay(1000);
-        battleBotDrive.drive(0, 0);
+        battleBotDrive.drive(-5, -5);
         break;
 
     case NON_SENSOR:
         updateSecondLCDText("No tape");
-        delay(1000);
-        battleBotDrive.drive(10,10);
+        battleBotDrive.drive(45, 45); // zet terug naar 10
         break;
 
     default:
@@ -345,7 +349,6 @@ void receiveAndStoreCommand()
  */ 
 void executeStoredCommand()
 {
-
     if (commandString == "F")
     {
         updateLCDText("Driving forward");
@@ -362,13 +365,13 @@ void executeStoredCommand()
     {
         updateLCDText("Driving left");
         updateSecondLCDText("No Game Selected");
-        battleBotDrive.drive(0, 200);
+        battleBotDrive.drive(0, 100);
     }
     else if (commandString == "R")
     {
         updateLCDText("Driving right");
         updateSecondLCDText("No Game Selected");
-        battleBotDrive.drive(200, 0);
+        battleBotDrive.drive(100, 0);
     }
     else if (commandString == "S")
     {
@@ -381,7 +384,7 @@ void executeStoredCommand()
     }
     else
     {        
-        updateLCDText("Yellow Cyclops");
+        updateLCDText("Yellow Cyclops 3");
         updateSecondLCDText("Awaiting input..");
     }
 }
