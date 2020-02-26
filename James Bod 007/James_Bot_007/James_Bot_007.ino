@@ -141,7 +141,7 @@ void setup()
     lcd.backlight();
     updateLCDText("Bod, James Bod");
     updateSecondLCDText("Welcome");
-    delay(1000);
+    delay(2000);
     Serial.begin(9600);
     while (!Serial)
     {
@@ -234,7 +234,7 @@ void updateSecondLCDText(String secondScreenText)
 
 
 /**
- * Lijn volgen programma, werkt niet maar is alvast klein begin
+ * Lijn volgen programma, werkt decent nu
  */
 void followLineProgram()
 {
@@ -243,29 +243,104 @@ void followLineProgram()
     {
     case RIGHT_SENSOR:
         updateSecondLCDText("Tape right");
-        battleBotDrive.drive(40, -10);
-        //battleBotDrive.drive(80, -40); 
+        battleBotDrive.drive(10, -15);
         break;
 
     case LEFT_SENSOR:
         updateSecondLCDText("Tape left");
-        battleBotDrive.drive(-10, 40);
-        //battleBotDrive.drive(-40, 80); 
+        battleBotDrive.drive(-15, 10);
         break;
 
     case BOTH_SENSOR:
         updateSecondLCDText("Tape both");
-        battleBotDrive.drive(0, 0);
+        battleBotDrive.drive(-10, -10);
         break;
 
     case NON_SENSOR:
-        updateSecondLCDText("No tape");
-        battleBotDrive.drive(100, 250);
+        updateSecondLCDText("No tape detected");
+        battleBotDrive.drive(85, 100);
         break;
 
     default:
         break;
     }
+}
+
+/**
+ * doolhof programma rechts
+ */
+void doolhofRechts()
+{
+    TapeDetected onSensor = detectTape();
+    switch (onSensor)
+    {
+    case RIGHT_SENSOR:
+        updateSecondLCDText("Tape right");
+        battleBotDrive.drive(10, -15);
+        break;
+
+    case LEFT_SENSOR:
+        updateSecondLCDText("Tape left");
+        battleBotDrive.drive(-15, 10);
+        break;
+
+    case BOTH_SENSOR:
+        updateSecondLCDText("Tape both");
+        battleBotDrive.drive(20, 0);
+        break;
+
+    case NON_SENSOR:
+        updateSecondLCDText("No tape detected");
+        battleBotDrive.drive(42, 50);
+        break;
+
+    default:
+        break;
+    }
+}
+
+/**
+ * doolhof programma links
+ */
+void doolhofLinks()
+{
+    TapeDetected onSensor = detectTape();
+    switch (onSensor)
+    {
+    case RIGHT_SENSOR:
+        updateSecondLCDText("Tape right");
+        battleBotDrive.drive(10, -15);
+        break;
+
+    case LEFT_SENSOR:
+        updateSecondLCDText("Tape left");
+        battleBotDrive.drive(-15, 10);
+        break;
+
+    case BOTH_SENSOR:
+        updateSecondLCDText("Tape both");
+        battleBotDrive.drive(0, 20);
+        break;
+
+    case NON_SENSOR:
+        updateSecondLCDText("No tape detected");
+        battleBotDrive.drive(42, 50);
+        break;
+
+    default:
+        break;
+    }
+}
+
+/**
+ * parcour
+ */
+void parcour()
+{
+    int distance = sonar.ping_cm();
+    String distanceLCDText = String(distance) + "cm";
+    updateSecondLCDText(distanceLCDText);
+    delay(500);
 }
 
 /**
@@ -317,6 +392,9 @@ void receiveAndStoreCommand()
         case '3':
             commandString = "3";
             break;
+        case '4':
+            commandString = "4";
+            break;
         case '5':
             commandString = "5";
             break;
@@ -348,25 +426,25 @@ void executeStoredCommand()
     {
         updateLCDText("Driving forward");
         updateSecondLCDText("No Game Selected");
-        battleBotDrive.drive(100, 200);
+        battleBotDrive.drive(140, 200);
     }
     else if (commandString == "B")
     {
         updateLCDText("Driving backward");
         updateSecondLCDText("No Game Selected");
-        battleBotDrive.drive(-150, -200);
+        battleBotDrive.drive(-140, -200);
     }
     else if (commandString == "L")
     {
         updateLCDText("Driving left");
         updateSecondLCDText("No Game Selected");
-        battleBotDrive.drive(0, 200);
+        battleBotDrive.drive(0, 100);
     }
     else if (commandString == "R")
     {
         updateLCDText("Driving right");
         updateSecondLCDText("No Game Selected");
-        battleBotDrive.drive(200, 0);
+        battleBotDrive.drive(70, 0);
     }
     else if (commandString == "S")
     {
@@ -374,8 +452,23 @@ void executeStoredCommand()
     }
     else if (commandString == "1")
     {
-        updateLCDText("game 1");
+        updateLCDText("Lijn Race");
         followLineProgram();
+    }
+    else if (commandString == "2")
+    {
+        updateLCDText("Doolhof Rechts");
+        doolhofRechts();
+    }
+    else if (commandString == "3")
+    {
+        updateLCDText("Doolhof Links");
+        doolhofLinks();
+    }
+    else if (commandString == "4")
+    {
+        updateLCDText("Parcour");
+        parcour();
     }
     else
     {        
@@ -388,13 +481,12 @@ void still()
 {
     //variabelen voor het 'autonoom' rijden
     startTimer = 0;
-
     endTimer = false;
     start = false;
     firstTime = true;
 
     //vars for the other games to reset if called.
-    updateLCDText("STOP");
+    updateLCDText("Bod, James Bod");
     updateSecondLCDText("STOP");
     battleBotDrive.drive(0, 0);
 }
