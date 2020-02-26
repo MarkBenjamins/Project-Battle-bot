@@ -141,7 +141,7 @@ void setup()
     lcd.backlight();
     updateLCDText("Bod, James Bod");
     updateSecondLCDText("Welcome");
-    delay(2000);
+    delay(1000);
     Serial.begin(9600);
     while (!Serial)
     {
@@ -243,22 +243,24 @@ void followLineProgram()
     {
     case RIGHT_SENSOR:
         updateSecondLCDText("Tape right");
-        battleBotDrive.drive(10, -15);
+        battleBotDrive.drive(40, -10);
+        //battleBotDrive.drive(80, -40); 
         break;
 
     case LEFT_SENSOR:
         updateSecondLCDText("Tape left");
-        battleBotDrive.drive(-15, 10);
+        battleBotDrive.drive(-10, 40);
+        //battleBotDrive.drive(-40, 80); 
         break;
 
     case BOTH_SENSOR:
         updateSecondLCDText("Tape both");
-        battleBotDrive.drive(-10, -10);
+        battleBotDrive.drive(0, 0);
         break;
 
     case NON_SENSOR:
-        updateSecondLCDText("No tape detected");
-        battleBotDrive.drive(85, 100);
+        updateSecondLCDText("No tape");
+        battleBotDrive.drive(100, 250);
         break;
 
     default:
@@ -346,25 +348,25 @@ void executeStoredCommand()
     {
         updateLCDText("Driving forward");
         updateSecondLCDText("No Game Selected");
-        battleBotDrive.drive(140, 200);
+        battleBotDrive.drive(100, 200);
     }
     else if (commandString == "B")
     {
         updateLCDText("Driving backward");
         updateSecondLCDText("No Game Selected");
-        battleBotDrive.drive(-140, -200);
+        battleBotDrive.drive(-150, -200);
     }
     else if (commandString == "L")
     {
         updateLCDText("Driving left");
         updateSecondLCDText("No Game Selected");
-        battleBotDrive.drive(0, 100);
+        battleBotDrive.drive(0, 200);
     }
     else if (commandString == "R")
     {
         updateLCDText("Driving right");
         updateSecondLCDText("No Game Selected");
-        battleBotDrive.drive(70, 0);
+        battleBotDrive.drive(200, 0);
     }
     else if (commandString == "S")
     {
@@ -392,7 +394,7 @@ void still()
     firstTime = true;
 
     //vars for the other games to reset if called.
-    updateLCDText("Bod, James Bod");
+    updateLCDText("STOP");
     updateSecondLCDText("STOP");
     battleBotDrive.drive(0, 0);
 }
