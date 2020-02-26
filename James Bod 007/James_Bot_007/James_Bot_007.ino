@@ -243,12 +243,12 @@ void followLineProgram()
     {
     case RIGHT_SENSOR:
         updateSecondLCDText("Tape right");
-        battleBotDrive.drive(10, -10);
+        battleBotDrive.drive(10, -15);
         break;
 
     case LEFT_SENSOR:
         updateSecondLCDText("Tape left");
-        battleBotDrive.drive(-10, 10);
+        battleBotDrive.drive(-15, 10);
         break;
 
     case BOTH_SENSOR:
@@ -352,7 +352,7 @@ void executeStoredCommand()
     {
         updateLCDText("Driving backward");
         updateSecondLCDText("No Game Selected");
-        battleBotDrive.drive(-150, -200);
+        battleBotDrive.drive(-140, -200);
     }
     else if (commandString == "L")
     {
@@ -364,7 +364,7 @@ void executeStoredCommand()
     {
         updateLCDText("Driving right");
         updateSecondLCDText("No Game Selected");
-        battleBotDrive.drive(47.5, 0);
+        battleBotDrive.drive(70, 0);
     }
     else if (commandString == "S")
     {
