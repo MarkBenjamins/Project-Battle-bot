@@ -286,7 +286,7 @@ void doolhofRechts()
 
     case BOTH_SENSOR:
         updateSecondLCDText("Tape both");
-        battleBotDrive.drive(20, 0);
+        battleBotDrive.drive(40, 0);
         break;
 
     case NON_SENSOR:
@@ -319,7 +319,7 @@ void doolhofLinks()
 
     case BOTH_SENSOR:
         updateSecondLCDText("Tape both");
-        battleBotDrive.drive(0, 20);
+        battleBotDrive.drive(0, 40);
         break;
 
     case NON_SENSOR:
@@ -337,10 +337,32 @@ void doolhofLinks()
  */
 void parcour()
 {
-    int distance = sonar.ping_cm();
-    String distanceLCDText = String(distance) + "cm";
-    updateSecondLCDText(distanceLCDText);
-    delay(500);
+//    int distance = sonar.ping_cm();
+//    String distanceLCDText = String(distance) + "cm";
+//    updateSecondLCDText(distanceLCDText);
+//    delay(500);
+
+    if (sonar.ping_cm() > 30)
+    {
+        updateSecondLCDText("meer dan 30cm");
+        battleBotDrive.drive(42, 50);
+    }
+    else if (sonar.ping_cm() <= 30)
+    {
+        updateSecondLCDText("Minder dan 30cm");
+        battleBotDrive.drive(5, -5);
+        delay(1000);
+        battleBotDrive.drive(14, 20);
+        delay(1000);
+        battleBotDrive.drive(-5, 5);
+        delay(1000);
+    }
+    else
+    {
+        updateSecondLCDText("Critical Error");
+        still();
+        delay(5000);
+    }
 }
 
 /**
