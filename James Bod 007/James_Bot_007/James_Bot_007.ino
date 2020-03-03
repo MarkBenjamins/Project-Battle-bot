@@ -258,7 +258,7 @@ void followLineProgram()
 
     case NON_SENSOR:
         updateSecondLCDText("No tape detected");
-        battleBotDrive.drive(85, 100);
+        battleBotDrive.drive(70, 100);
         break;
 
     default:
@@ -291,7 +291,7 @@ void doolhofRechts()
 
     case NON_SENSOR:
         updateSecondLCDText("No tape detected");
-        battleBotDrive.drive(42, 50);
+        battleBotDrive.drive(24, 40);
         break;
 
     default:
@@ -324,7 +324,7 @@ void doolhofLinks()
 
     case NON_SENSOR:
         updateSecondLCDText("No tape detected");
-        battleBotDrive.drive(42, 50);
+        battleBotDrive.drive(24, 40);
         break;
 
     default:
@@ -341,21 +341,21 @@ void parcour()
 //    String distanceLCDText = String(distance) + "cm";
 //    updateSecondLCDText(distanceLCDText);
 //    delay(500);
-
+    delay(1000);
     if (sonar.ping_cm() > 30)
     {
         updateSecondLCDText("meer dan 30cm");
-        battleBotDrive.drive(42, 50);
+        battleBotDrive.drive(24, 40);
     }
     else if (sonar.ping_cm() <= 30)
     {
         updateSecondLCDText("Minder dan 30cm");
-        battleBotDrive.drive(5, -5);
+        battleBotDrive.drive(15, -15);
+        delay(500);
+        battleBotDrive.drive(24, 40);
         delay(1000);
-        battleBotDrive.drive(14, 20);
-        delay(1000);
-        battleBotDrive.drive(-5, 5);
-        delay(1000);
+        battleBotDrive.drive(-20, 0);
+        delay(300);
     }
     else
     {
