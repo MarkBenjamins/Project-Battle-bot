@@ -1,0 +1,10 @@
+//Heeft 2 variabellen nodig. 
+//int lcdLast = 0;
+//int lcdDelay = 200;
+void updateLCD(String text) {
+  if(millis() > lcdLast) {
+      lcd.clear();
+      lcd.print(text);
+      lcdLast += lcdDelay;
+  }
+}
