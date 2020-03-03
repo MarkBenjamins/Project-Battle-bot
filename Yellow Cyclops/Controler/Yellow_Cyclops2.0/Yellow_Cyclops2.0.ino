@@ -1,19 +1,3 @@
-#include <ArduinoRobot.h>
-#include <Arduino_LCD.h>
-#include <Compass.h>
-#include <EasyTransfer2.h>
-#include <EEPROM_I2C.h>
-#include <Fat16.h>
-#include <Fat16Config.h>
-#include <Fat16mainpage.h>
-#include <Fat16util.h>
-#include <FatStructs.h>
-#include <Multiplexer.h>
-#include <SdCard.h>
-#include <SdInfo.h>
-#include <Squawk.h>
-#include <SquawkSD.h>
-
 /**
  * Alle library's die we toevoegen
  */
@@ -262,7 +246,7 @@ void followLineProgram()
         //battleBotDrive.drive(40, -10); werkt
         //battleBotDrive.drive(80, -40);
 
-        battleBotDrive.drive(40, -10);
+        //battleBotDrive.drive(40, -10);
         battleBotDrive.drive(80, -40);
         break;
 
@@ -271,7 +255,7 @@ void followLineProgram()
         //battleBotDrive.drive(-10, 40); werkt
         //battleBotDrive.drive(-40, 80);
 
-        battleBotDrive.drive(-10, 40);
+        //battleBotDrive.drive(-10, 40);
         battleBotDrive.drive(-40, 80);
         break;
 
@@ -300,22 +284,22 @@ void doolhofRechts()
     {
     case RIGHT_SENSOR:
         updateSecondLCDText("Tape left");
-        battleBotDrive.drive(-15, 20);
+        battleBotDrive.drive(-40, 80);
         break;
 
     case LEFT_SENSOR:
         updateSecondLCDText("Tape right");
-        battleBotDrive.drive(20, -15);
+        battleBotDrive.drive(80, -40);
         break;
 
     case BOTH_SENSOR:
         updateSecondLCDText("Tape both");
-        battleBotDrive.drive(20, -15);
+        battleBotDrive.drive(80, -40);
         break;
 
     case NON_SENSOR:
         updateSecondLCDText("No tape detected");
-        battleBotDrive.drive(50, 50);
+        battleBotDrive.drive(50, 58);
         break;
 
     default:
@@ -333,22 +317,23 @@ void doolhofLinks()
     {
     case RIGHT_SENSOR:
         updateSecondLCDText("Tape left");
-        battleBotDrive.drive(-15, 10);        
+        battleBotDrive.drive(-40, 80);        
         break;
 
     case LEFT_SENSOR:
         updateSecondLCDText("Tape right");
-        battleBotDrive.drive(10, -15);
+        battleBotDrive.drive(80, -40);
         break;
 
     case BOTH_SENSOR:
         updateSecondLCDText("Tape both");
-        battleBotDrive.drive(-15, 10);
+        battleBotDrive.drive(-40, 80);
         break;
 
     case NON_SENSOR:
         updateSecondLCDText("No tape detected");
-        battleBotDrive.drive(42, 50);
+        //battleBotDrive.drive(42, 50); //old
+        battleBotDrive.drive(50, 58);
         break;
 
     default:
