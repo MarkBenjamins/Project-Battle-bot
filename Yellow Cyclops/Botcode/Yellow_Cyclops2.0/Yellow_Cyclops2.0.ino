@@ -346,11 +346,34 @@ void doolhofLinks()
  */
 void parcour()
 {
-    int distance = sonar.ping_cm();
-    String distanceLCDText = String(distance) + "cm";
-    updateSecondLCDText(distanceLCDText);
-    delay(500);
+//    int distance = sonar.ping_cm();
+//    String distanceLCDText = String(distance) + "cm";
+//    updateSecondLCDText(distanceLCDText);
+//    delay(500);
+    delay(1000);
+    if (sonar.ping_cm() > 30)
+    {
+        updateSecondLCDText("meer dan 30cm");
+        battleBotDrive.drive(24, 40);
+    }
+    else if (sonar.ping_cm() <= 30)
+    {
+        updateSecondLCDText("Minder dan 30cm");
+        battleBotDrive.drive(15, -15);
+        delay(500);
+        battleBotDrive.drive(24, 40);
+        delay(1000);
+        battleBotDrive.drive(-20, 0);
+        delay(300);
+    }
+    else
+    {
+        updateSecondLCDText("Critical Error");
+        still();
+        delay(5000);
+    }
 }
+
 /**
  * Begint door de loop() functie, checkt of er bluetooth commands binnenkomen.
  */ 
@@ -400,6 +423,9 @@ void receiveAndStoreCommand()
         case '3':
             commandString = "3";
             break;
+        case '4':
+            commandString = "4";
+            break;
         case '5':
             commandString = "5";
             break;
@@ -430,7 +456,7 @@ void executeStoredCommand()
     {
         updateLCDText("Driving forward");
         updateSecondLCDText("No Game Selected");
-        battleBotDrive.drive(100, 200);
+        battleBotDrive.drive(150, 150);
     }
     else if (commandString == "B")
     {
