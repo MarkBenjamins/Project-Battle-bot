@@ -346,32 +346,33 @@ void doolhofLinks()
  */
 void parcour()
 {
-//    int distance = sonar.ping_cm();
-//    String distanceLCDText = String(distance) + "cm";
-//    updateSecondLCDText(distanceLCDText);
-//    delay(500);
+    int distance = sonar.ping_cm();
+    String distanceLCDText = String(distance) + "cm";
+    updateSecondLCDText(distanceLCDText);
+    delay(500);
     delay(1000);
-    if (sonar.ping_cm() > 30)
+//    if ((sonar.ping_cm() > 30))
+    if ((sonar.ping_cm() <= 30) && (sonar.ping_cm() < 0))
     {
         updateSecondLCDText("meer dan 30cm");
         battleBotDrive.drive(24, 40);
     }
-    else if (sonar.ping_cm() <= 30)
-    {
-        updateSecondLCDText("Minder dan 30cm");
-        battleBotDrive.drive(15, -15);
-        delay(500);
-        battleBotDrive.drive(24, 40);
-        delay(1000);
-        battleBotDrive.drive(-20, 0);
-        delay(300);
-    }
-    else
-    {
-        updateSecondLCDText("Critical Error");
-        still();
-        delay(5000);
-    }
+//    else if (sonar.ping_cm() <= 30)
+//    {
+//        updateSecondLCDText("Minder dan 30cm");
+//        battleBotDrive.drive(15, -15);
+//        delay(500);
+//        battleBotDrive.drive(24, 40);
+//        delay(1000);
+//        battleBotDrive.drive(-20, 0);
+//        delay(300);
+//    }
+//    else
+//    {
+//        updateSecondLCDText("Critical Error");
+//        still();
+//        delay(5000);
+//    }
 }
 
 /**
