@@ -342,19 +342,19 @@ void parcour()
 //    updateSecondLCDText(distanceLCDText);
 //    delay(500);
     delay(1000);
-    if (sonar.ping_cm() > 30)
+    if (sonar.ping_cm() > 40)
     {
-        updateSecondLCDText("meer dan 30cm");
+        updateSecondLCDText("meer dan 40cm");
         battleBotDrive.drive(24, 40);
     }
-    else if (sonar.ping_cm() <= 30)
+    else if (sonar.ping_cm() <= 40)
     {
-        updateSecondLCDText("Minder dan 30cm");
+        updateSecondLCDText("Minder dan 40cm");
         battleBotDrive.drive(15, -15);
-        delay(500);
+        delay(600);
         battleBotDrive.drive(24, 40);
         delay(1000);
-        battleBotDrive.drive(-20, 0);
+        battleBotDrive.drive(-10, 0);
         delay(300);
     }
     else
